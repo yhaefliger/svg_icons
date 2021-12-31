@@ -15,14 +15,14 @@ class Utils {
   /**
    * Drupal FileSystem service.
    *
-   * @var Drupal\Core\File\FileSystem
+   * @var \Drupal\Core\File\FileSystem
    */
   protected $filesystem;
 
   /**
    * Twig loader.
    *
-   * @var Drupal\Core\Template\Loader\FilesystemLoader
+   * @var \Drupal\Core\Template\Loader\FilesystemLoader
    */
   protected $loader;
 
@@ -63,37 +63,62 @@ class Utils {
    * @param null|string $path
    *   Relative path to icons.
    *
-   * @return null|string
+   * @return string|false
    *   The full path or null if not found.
    */
   public function getPath($path = NULL) {
     $path = $path ? $path : $this->config->get('path');
-    $realpath = NULL;
 
     if (!empty($path)) {
-      // Twig loader replace @theme/@module with template dir.
-      if (substr($path, 0, 1) == '@') {
-        $folders = explode('/', $path);
-        $base = array_shift($folders);
-        $base_path = str_replace('/templates', '', $this->loader->getPaths(str_replace('@', '', $base)));
-        if (!empty($base_path)) {
-          $path = current($base_path) . '/' . implode('/', $folders);
-        }
-        else {
-          throw new \Exception('Template path not found' . $base);
-        }
-      }
-
-      $realpath = $this->filesystem->realpath($path);
-      if (!$realpath) {
-        throw new \Exception('Path not found ' . $path);
-      }
+      return $this->getRealPath($path);
     }
     else {
       throw new \Exception('Empty svg path configured');
     }
+  }
 
-    return $realpath;
+  /**
+   * Check if the path is valid.
+   *
+   * @param string $path
+   *   The path to check.
+   *
+   * @return bool
+   *   True if path is valid.
+   */
+  public function isValidPath(string $path): bool {
+    if ($this->getRealPath($path)) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+  /**
+   * Get icons path from config.
+   *
+   * @param string $path
+   *   Relative path.
+   *
+   * @return string|false
+   *   The full path or false if not found.
+   */
+  protected function getRealPath(string $path): bool|string {
+    // Twig loader replace @theme/@module with template dir.
+    if (substr($path, 0, 1) == '@') {
+      $folders = explode('/', $path);
+      $base = array_shift($folders);
+      $base_path = str_replace('/templates', '', $this->loader->getPaths(str_replace('@', '', $base)));
+      if (!empty($base_path)) {
+        $path = current($base_path) . '/' . implode('/', $folders);
+      }
+      else {
+        throw new \Exception('Template path not found' . $base);
+      }
+    }
+
+    return $this->filesystem->realpath($path);
   }
 
 }

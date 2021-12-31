@@ -10,9 +10,9 @@ In the configuration page you can define the folder containing your svgs files. 
 
 ## Usage
 
-Once configured you can call add svg from your twig template using the syntax 
+Once configured you can call add svg from your twig template using the syntax
 ```
-svg($iconName, $class, $attributes)
+svg(string $iconName, string $class, array $attributes)
 ```
 Icon name is the filename of the desired svg without the extension, class is an optional string for added classes and attributes is an optional array of additional attributes merged to the final svg element.
 ```
@@ -26,5 +26,4 @@ From the backend page the icons can also be imported to a media library (which r
 ## TODO:
 
 - Twig filter to add class/attributes to icons rendered from media library
-- Check svg support / media library field settings before import
 - Add support for multiple collections (set of folder/default class like blade ui kit)

@@ -93,6 +93,9 @@ class SettingsForm extends ConfigFormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
+    if (!$this->utils->isValidPath($form_state->getValue('path'))) {
+      $form_state->setErrorByName('path', $this->t('Invalid path.'));
+    }
   }
 
   /**
@@ -102,11 +105,10 @@ class SettingsForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
     $config = $this->config('svg_icons.settings');
 
-    if ($form_state->hasValue('path')) {
-      $config->set('path', $form_state->getValue('path'));
-    }
-    if ($form_state->hasValue('default_class')) {
-      $config->set('default_class', $form_state->getValue('default_class'));
+    foreach (['path', 'default_class', 'remove_existing_class'] as $key) {
+      if ($form_state->hasValue($key)) {
+        $config->set($key, $form_state->getValue($key));
+      }
     }
 
     $config->save();
