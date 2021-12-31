@@ -1,0 +1,19 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function svg_icons_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.svg_icons':
+      return t('
+        <h2>SVG Icons</h2>
+        <p>Offer twig helper to display svg elements in your templates</p>
+      ');
+
+    case 'svg_icons.import':
+      return '<p>' . t('This will import the svg from the path') . '</p>';
+  }
+}

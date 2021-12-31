@@ -1,0 +1,8 @@
+name: 'SVG Icons'
+description: Import SVG Icons and add a Twig filter to display svg icons from a repository
+type: module
+core_version_requirement: ^9
+version: 0.1
+package: Custom
+configure: svg_icons.settings
+dependencies:

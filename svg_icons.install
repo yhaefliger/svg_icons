@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for Lorem ipsum module.
+ */
+
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ */
+function svg_icons_install() {
+  /*
+  user_role_change_permissions(RoleInterface::ANONYMOUS_ID, array(
+    'import svg icons' => TRUE,
+  ));
+  */
+}

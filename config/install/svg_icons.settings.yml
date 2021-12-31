@@ -1,0 +1,5 @@
+path: '@svg_icons/svg'
+default_class: 'fill-current'
+import_class: ''
+media_bundle: 'icon'
+media_bundle_field: 'field_media_svg'

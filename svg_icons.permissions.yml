@@ -1,0 +1,4 @@
+import svg icons to media library:
+  title: 'Import svg icons to media library'
+  description: 'Permission to import icons to media library'
+  restrict access: FALSE

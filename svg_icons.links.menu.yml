@@ -1,0 +1,5 @@
+svg_icons:
+ title: SVG Icons
+ description: 'Configure and import SVG icons'
+ route_name: svg_icons.settings
+ parent: 'system.admin_config_media'

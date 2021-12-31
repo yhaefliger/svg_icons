@@ -1,0 +1,15 @@
+svg_icons.settings:
+  path: '/admin/config/media/svg-icons'
+  defaults:
+    _form: '\Drupal\svg_icons\Form\SettingsForm'
+    _title: 'SVG Icons'
+  requirements:
+    _permission: 'administer site configuration'
+
+svg_icons.import:
+  path: '/admin/config/media/svg-icons/import'
+  defaults:
+    _form: '\Drupal\svg_icons\Form\ImportForm'
+    _title: 'SVG Icons Import'
+  requirements:
+    _permission: 'import svg icons to media library'

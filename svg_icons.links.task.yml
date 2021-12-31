@@ -1,0 +1,9 @@
+svg_icons.tabs:
+  route_name: svg_icons.settings
+  title: Configuration
+  base_route: svg_icons.settings
+
+svg_icons.tab_import:
+  route_name: svg_icons.import
+  title: Import
+  base_route: svg_icons.settings
