@@ -73,7 +73,7 @@ class Utils {
       return $this->getRealPath($path);
     }
     else {
-      throw new \Exception('Empty svg path configured');
+      throw new \Exception('No svg path configured.');
     }
   }
 
@@ -114,7 +114,7 @@ class Utils {
         $path = current($base_path) . '/' . implode('/', $folders);
       }
       else {
-        throw new \Exception('Template path not found' . $base);
+        return FALSE;
       }
     }
 
