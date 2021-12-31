@@ -7,7 +7,6 @@ use Drupal\svg_icons\Utils;
 use Drupal\file\Entity\File;
 use Drupal\svg_icons\SVGIcon;
 use Drupal\media\Entity\Media;
-use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -170,6 +169,16 @@ class ImportForm extends FormBase {
     ];
 
     return $form;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    parent::validateForm($form, $form_state);
+    if (!$form_state->getValue('path') || !$this->utils->isValidPath($form_state->getValue('path'))) {
+      $form_state->setErrorByName('path', $this->t('Invalid path.'));
+    }
   }
 
   /**
