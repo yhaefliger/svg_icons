@@ -58,7 +58,7 @@ class Utils {
   }
 
   /**
-   * Get icons path from config.
+   * Get realpath from config default.
    *
    * @param null|string $path
    *   Relative path to icons.
@@ -86,7 +86,7 @@ class Utils {
    * @return bool
    *   True if path is valid.
    */
-  public function isValidPath(string $path): bool {
+  public function isValidPath(string $path) {
     if ($this->getRealPath($path)) {
       return TRUE;
     }
@@ -96,7 +96,7 @@ class Utils {
   }
 
   /**
-   * Get icons path from config.
+   * Get realpath from twig loader or relative.
    *
    * @param string $path
    *   Relative path.
@@ -104,7 +104,7 @@ class Utils {
    * @return string|false
    *   The full path or false if not found.
    */
-  protected function getRealPath(string $path): bool|string {
+  public function getRealPath(string $path) {
     // Twig loader replace @theme/@module with template dir.
     if (substr($path, 0, 1) == '@') {
       $folders = explode('/', $path);

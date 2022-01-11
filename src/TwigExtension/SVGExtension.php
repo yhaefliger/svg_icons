@@ -22,7 +22,7 @@ class SVGExtension extends AbstractExtension {
   /**
    * Class Constructor injecting SVG Utils.
    *
-   * @param Utils $utils
+   * @param \Drupal\svg_icons\Utils $utils
    *   SVG Utils.
    */
   public function __construct(Utils $utils) {
@@ -48,8 +48,8 @@ class SVGExtension extends AbstractExtension {
   /**
    * Return the SVG markup.
    *
-   * @param string $name
-   *   SVG icon name.
+   * @param string $fullpath
+   *   SVG icon name with optional path.
    * @param string $class
    *   CSS string for classes to add.
    * @param array $attributes
@@ -58,24 +58,43 @@ class SVGExtension extends AbstractExtension {
    * @return string
    *   SVG icon markup.
    */
-  public function svg(string $name, string $class = '', array $attributes = []): string {
-    $path = $this->utils->getPath();
-    if ($path) {
-      $filename = $path . '/' . $name . '.svg';
-      if (file_exists($filename)) {
-        $content = file_get_contents($filename);
-        $icon = new SVGIcon($content, $attributes);
-        $icon->addClass($this->utils->defaultClass());
-        $icon->addClass($class);
+  public function svg(string $fullpath, string $class = '', array $attributes = []): string {
+    try {
+      $paths = explode('/', $fullpath);
+      $name = array_pop($paths);
 
-        return $icon;
+      // Path provided in the fullpath.
+      if (count($paths) > 0) {
+        $path = $this->utils->getRealPath(implode('/', $paths));
+      }
+      // Use the default path from config.
+      else {
+        $path = $this->utils->getPath();
+      }
+
+      if ($path) {
+        if (substr($name, -4) !== '.svg') {
+          $name .= ".svg";
+        }
+        $filename = $path . '/' . $name;
+        if (file_exists($filename)) {
+          $content = file_get_contents($filename);
+          $icon = new SVGIcon($content, $attributes);
+          $icon->addClass($this->utils->defaultClass());
+          $icon->addClass($class);
+
+          return $icon;
+        }
+        else {
+          throw new \Exception("SVG File $filename not found.");
+        }
       }
       else {
-        return '';
+        throw new \Exception("SVG Path not found for icon $name.");
       }
     }
-    else {
-      return '';
+    catch (\Exception $e) {
+      return $fullpath;
     }
   }
 

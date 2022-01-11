@@ -134,7 +134,7 @@ class ImportForm extends FormBase {
       }
       // Probably missing svg source support module.
       else {
-        return $this->setError($this->t('No media bundles can handle svg file format. Consider installing either <a href=":svg_image_url">svg_image</a> or <a href=":svg_image_field_url">svg_image_field module</a>.', [
+        return $this->setError($this->t('No media bundles can handle svg file format. Consider installing either <a href=":svg_image_url">svg_image</a> or <a href=":svg_image_field_url">svg_image_field</a> module.', [
           ':svg_image_url' => 'https://www.drupal.org/project/svg_image',
           ':svg_image_field_url' => 'https://www.drupal.org/project/svg_image_field',
         ]), $form);
