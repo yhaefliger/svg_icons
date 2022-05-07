@@ -25,5 +25,5 @@ From the backend page the icons can also be imported to a media library (which r
 
 ## TODO:
 
-- Twig filter to add class/attributes to icons rendered from media library
+- Twig filter or media widget to add class/attributes to icons rendered from media library
 - Add support for multiple collections (set of folder/default class like blade ui kit)
