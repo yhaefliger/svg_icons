@@ -41,7 +41,11 @@ class SVGExtension extends AbstractExtension {
    */
   public function getFunctions() {
     return [
-      new TwigFunction('svg', [$this, 'svg'], ['is_safe' => ['html']])
+      new TwigFunction(
+        'svg',
+        [$this, 'svg'],
+        ['is_safe' => ['html']]
+      )
     ];
   }
 
@@ -84,18 +88,14 @@ class SVGExtension extends AbstractExtension {
           $icon->addClass($class);
 
           return $icon;
-        }
-        else {
+        } else {
           throw new \Exception("SVG File $filename not found.");
         }
-      }
-      else {
+      } else {
         throw new \Exception("SVG Path not found for icon $name.");
       }
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e) {
       return $fullpath;
     }
   }
-
 }

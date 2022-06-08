@@ -2,16 +2,13 @@
 
 namespace Drupal\svg_icons;
 
-use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Template\Loader\FilesystemLoader;
 
 /**
  * Utility class for SVG icons.
  */
-class Utils
-{
-
+class Utils {
 
   /**
    * Drupal FileSystem service.
@@ -42,8 +39,7 @@ class Utils
    * @param \Drupal\Core\Template\Loader\FilesystemLoader $loader
    *   Twig loader.
    */
-  public function __construct(FileSystem $filesystem, FilesystemLoader $loader)
-  {
+  public function __construct(FileSystem $filesystem, FilesystemLoader $loader) {
     $this->filesystem = $filesystem;
     $this->loader = $loader;
     $this->config = \Drupal::config('svg_icons.settings');
@@ -55,8 +51,7 @@ class Utils
    * @return string
    *   SVG icon.
    */
-  public function defaultClass()
-  {
+  public function defaultClass() {
     return $this->config->get('default_class');
   }
 
@@ -69,8 +64,7 @@ class Utils
    * @return string|false
    *   The full path or null if not found.
    */
-  public function getPath($path = NULL)
-  {
+  public function getPath($path = NULL) {
     $path = $path ? $path : $this->config->get('path');
 
     if (!empty($path)) {
@@ -89,8 +83,7 @@ class Utils
    * @return bool
    *   True if path is valid.
    */
-  public function isValidPath(string $path)
-  {
+  public function isValidPath(string $path) {
     if ($this->getRealPath($path)) {
       return TRUE;
     } else {
@@ -107,8 +100,7 @@ class Utils
    * @return string|false
    *   The full path or false if not found.
    */
-  protected function getRealPath(string $path)
-  {
+  public function getRealPath(string $path) {
     // Twig loader replace @theme/@module with template dir.
     if (substr($path, 0, 1) == '@') {
       $folders = explode('/', $path);
