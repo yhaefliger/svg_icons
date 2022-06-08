@@ -69,7 +69,8 @@ class Utils {
 
     if (!empty($path)) {
       return $this->getRealPath($path);
-    } else {
+    }
+    else {
       throw new \Exception('No svg path configured.');
     }
   }
@@ -86,7 +87,8 @@ class Utils {
   public function isValidPath(string $path) {
     if ($this->getRealPath($path)) {
       return TRUE;
-    } else {
+    }
+    else {
       return FALSE;
     }
   }
@@ -108,11 +110,13 @@ class Utils {
       $base_path = str_replace('/templates', '', $this->loader->getPaths(str_replace('@', '', $base)));
       if (!empty($base_path)) {
         $path = current($base_path) . '/' . implode('/', $folders);
-      } else {
+      }
+      else {
         return FALSE;
       }
     }
 
     return $this->filesystem->realpath($path);
   }
+
 }

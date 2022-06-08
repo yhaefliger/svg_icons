@@ -196,7 +196,8 @@ class ImportForm extends FormBase {
     $icons = [];
     if ($path) {
       $icons = glob("$path/*.svg");
-    } else {
+    }
+    else {
       $this->messenger()->addError('Invalid path.');
     }
     $realpath = $this->filesystem->realpath($this->config('system.file')->get('default_scheme') . "://");
@@ -220,7 +221,8 @@ class ImportForm extends FormBase {
           $file->setFilename($filename);
           $file->setPermanent();
           $file->save();
-        } else {
+        }
+        else {
           $file = reset($files);
         }
 
@@ -266,4 +268,5 @@ class ImportForm extends FormBase {
     ];
     return $form;
   }
+
 }

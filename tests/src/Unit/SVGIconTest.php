@@ -4,25 +4,29 @@ namespace Drupal\Tests\svg_icons\Unit;
 
 use Drupal\svg_icons\SVGIcon;
 
-class SVGIconTest extends SVGIconsTestBase
-{
+/**
+ * @coversDefaultClass \Drupal\svg_icons\SVGIcon
+ *
+ * @group SVG Icons
+ */
+class SVGIconTest extends SVGIconsTestCase {
 
   /**
-   * {@inheritDoc}
+   * Testing output of the SVG icon.
+   *
+   * @covers ::__toString
    */
-  protected function setUp(): void
-  {
-    parent::setUp();
-  }
-
-  public function testSVGCanOutput()
-  {
+  public function testSvgCanOutput() {
     $svg = new SVGIcon('<svg></svg>');
     $this->assertEquals('<svg></svg>', (string) $svg);
   }
 
-  public function testSVGIsCleaned()
-  {
+  /**
+   * Testing svg cleanup of eventual <?xml header.
+   *
+   * @covers ::cleanSvgContents
+   */
+  public function testSvgIsCleaned() {
     $svg = new SVGIcon('<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg></svg>');
     $this->assertEquals('<svg></svg>', (string) $svg);
@@ -32,15 +36,20 @@ class SVGIconTest extends SVGIconsTestBase
     $this->assertStringStartsWith('<svg', (string) $inkscape_basic);
   }
 
-  public function testSVGCanManageClasses()
-  {
+  /**
+   * Testing svg attributes addclas method.
+   *
+   * @covers ::addClass
+   */
+  public function testSvgCanManageClasses() {
     $svg = new SVGIcon('<svg class="firstclass"></svg>');
-    //initial class is keeped
+
+    // Initial class is keeped.
     $this->assertStringStartsWith('<svg class="firstclass"', (string) $svg);
-    //add second class
+    // Add second class.
     $svg->addClass('secondclass');
     $this->assertStringStartsWith('<svg class="firstclass secondclass"', (string) $svg);
-    //check no duplicates classes
+    // Check no duplicates classes.
     $svg->addClass('firstclass');
     $svg->addClass('secondclass');
     $this->assertStringStartsWith('<svg class="firstclass secondclass"', (string) $svg);
@@ -49,4 +58,5 @@ class SVGIconTest extends SVGIconsTestBase
     $inkscape_basic->addClass('firstclass');
     $this->assertStringStartsWith('<svg class="firstclass"', (string) $inkscape_basic);
   }
+
 }

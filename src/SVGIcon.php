@@ -79,4 +79,5 @@ class SVGIcon {
   private function cleanSvgContents(string $content): string {
     return trim(preg_replace('/^(<\?xml.+?\?>)/', '', $content));
   }
+
 }
