@@ -7,7 +7,8 @@ use Drupal\Core\Template\Attribute;
 /**
  * SVG icon class.
  */
-class SVGIcon {
+class SVGIcon
+{
 
   /**
    * Raw string content.
@@ -31,7 +32,8 @@ class SVGIcon {
    * @param array $attributes
    *   SVG dom document attriubtes.
    */
-  public function __construct(string $content, array $attributes = []) {
+  public function __construct(string $content, array $attributes = [])
+  {
     $this->content = $this->cleanSvgContents($content);
     $this->attributes = new Attribute($attributes);
 
@@ -49,7 +51,8 @@ class SVGIcon {
    * @param string $class
    *   CSS class to add.
    */
-  public function addClass($class) {
+  public function addClass($class)
+  {
     $this->attributes->addClass($class);
   }
 
@@ -59,7 +62,8 @@ class SVGIcon {
    * @return string
    *   SVG icon HTML element.
    */
-  public function __toString() {
+  public function __toString()
+  {
     return str_replace(
       '<svg',
       sprintf('<svg%s', $this->attributes),
@@ -76,8 +80,8 @@ class SVGIcon {
    * @return string
    *   Cleaned svg content.
    */
-  private function cleanSvgContents(string $content): string {
+  private function cleanSvgContents(string $content): string
+  {
     return trim(preg_replace('/^(<\?xml.+?\?>)/', '', $content));
   }
-
 }
