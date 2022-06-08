@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Allows users to import and insert svg icons from twig.
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**

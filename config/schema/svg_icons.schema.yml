@@ -13,3 +13,6 @@ svg_icons.settings:
     default_class:
       type: string
       label: 'Default class to add when creating SVG output'
+media.source.svg:
+  type: media.source.field_aware
+  label: '"SVG" media source configuration'
