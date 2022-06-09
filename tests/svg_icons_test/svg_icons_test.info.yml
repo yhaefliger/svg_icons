@@ -1,0 +1,9 @@
+name: 'SVG Icons Test'
+type: module
+description: Test imports / render from another module
+package: Testing
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - drupal:system (>= 8.0)
+  - drupal:svg_icons
