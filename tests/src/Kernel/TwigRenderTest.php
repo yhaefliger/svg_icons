@@ -78,6 +78,16 @@ class TwigRenderTest extends KernelTestBase {
   }
 
   /**
+   * Test inexistant icon return fallback icon name.
+   */
+  public function testInexistantIcon() {
+    $this->assertEquals(
+      'inexistant',
+      $this->environment->renderInline('{{ svg(\'inexistant\') }}')
+    );
+  }
+
+  /**
    * Test if it can render from anoter module.
    */
   public function testRenderIconFormOtherModule() {
