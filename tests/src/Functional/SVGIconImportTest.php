@@ -30,6 +30,10 @@ class SVGIconImportTest extends SVGIconFunctionalTestBase {
     $assert_session->fieldExists('media_bundle');
     $this->submitForm([], "Import icons into media", "svg-icons-import-form");
 
+    $assert_session = $this->assertSession();
+    $assert_session->statusCodeEquals(200);
+    $assert_session->responseContains('Import finished');
+
     $this->drupalGet('/admin/content/media');
     $assert_session = $this->assertSession();
     // Media type check.
@@ -39,5 +43,4 @@ class SVGIconImportTest extends SVGIconFunctionalTestBase {
     // SVG Icon check.
     $assert_session->responseContains('>druplicon.svg</a>');
   }
-
 }
