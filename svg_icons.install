@@ -10,7 +10,7 @@ use Drupal\user\RoleInterface;
 /**
  * Implements hook_install().
  */
-function svg_icons_install() {
+function svg_icons_install(): void {
   /*
   user_role_change_permissions(RoleInterface::ANONYMOUS_ID, array(
     'import svg icons' => TRUE,

@@ -32,7 +32,7 @@ class SVGExtension extends AbstractExtension {
   /**
    * {@inheritDoc}
    */
-  public function getName() {
+  public function getName(): string {
     return 'svg_icons.funcion';
   }
 

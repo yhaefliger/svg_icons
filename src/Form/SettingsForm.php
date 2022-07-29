@@ -25,14 +25,14 @@ class SettingsForm extends ConfigFormBase {
    * @param \Drupal\svg_icons\Utils $utils
    *   Shared SVG Icons utils.
    */
-  public function __construct(Utils $utils) {
+  final public function __construct(Utils $utils) {
     $this->utils = $utils;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     return new static($container->get('svg_icons.utils'));
   }
 
@@ -91,7 +91,7 @@ class SettingsForm extends ConfigFormBase {
    *
    * @{@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     parent::validateForm($form, $form_state);
     if (!$this->utils->isValidPath($form_state->getValue('path'))) {
       $form_state->setErrorByName('path', $this->t('Invalid path.'));
@@ -101,7 +101,7 @@ class SettingsForm extends ConfigFormBase {
   /**
    * {@inheritDoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     parent::submitForm($form, $form_state);
     $config = $this->config('svg_icons.settings');
 

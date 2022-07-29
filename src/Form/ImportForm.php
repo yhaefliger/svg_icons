@@ -70,7 +70,7 @@ class ImportForm extends FormBase {
    * @param \Drupal\svg_icons\Utils $utils
    *   SVG Icons Utils.
    */
-  public function __construct(
+  final public function __construct(
     FileSystemInterface $filesystem,
     AccountInterface $current_user,
     EntityTypeManagerInterface $entityTypeManager,
@@ -87,7 +87,7 @@ class ImportForm extends FormBase {
   /**
    * {@inheritDoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     return new static(
       $container->get('file_system'),
       $container->get('current_user'),
@@ -174,7 +174,7 @@ class ImportForm extends FormBase {
   /**
    * {@inheritDoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state):void {
     parent::validateForm($form, $form_state);
     if (!$form_state->getValue('path') || !$this->utils->isValidPath($form_state->getValue('path'))) {
       $form_state->setErrorByName('path', $this->t('Invalid path.'));
@@ -184,7 +184,7 @@ class ImportForm extends FormBase {
   /**
    * {@inheritDoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $values = $form_state->getValues();
 
     $mediaType = MediaType::load($values['media_bundle']);
@@ -257,7 +257,7 @@ class ImportForm extends FormBase {
    * @param array $form
    *   The form array.
    */
-  protected function setError(string $message, array $form) {
+  protected function setError(string $message, array $form): array {
     $form['warning'] = [
       '#type' => 'container',
       '#markup' => $message,

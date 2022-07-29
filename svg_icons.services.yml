@@ -1,9 +1,9 @@
 services:
   svg_icons.utils:
     class: Drupal\svg_icons\Utils
-    arguments: ['@file_system', '@twig.loader.filesystem']
+    arguments: ['@file_system', '@twig.loader.filesystem', '@config.factory']
   svg_icons.twig.extension:
     class: Drupal\svg_icons\TwigExtension\SVGExtension
     arguments: ['@svg_icons.utils']
-    tags: 
+    tags:
       - { name: twig.extension }

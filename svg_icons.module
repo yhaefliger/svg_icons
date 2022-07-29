@@ -10,7 +10,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function svg_icons_help($route_name, RouteMatchInterface $route_match) {
+function svg_icons_help(string $route_name, RouteMatchInterface $route_match): string {
   switch ($route_name) {
     case 'help.page.svg_icons':
       return t('

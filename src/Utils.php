@@ -4,6 +4,7 @@ namespace Drupal\svg_icons;
 
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Template\Loader\FilesystemLoader;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Utility class for SVG icons.
@@ -38,11 +39,13 @@ class Utils {
    *   FileSystem service.
    * @param \Drupal\Core\Template\Loader\FilesystemLoader $loader
    *   Twig loader.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Configuration factory.
    */
-  public function __construct(FileSystem $filesystem, FilesystemLoader $loader) {
+  public function __construct(FileSystem $filesystem, FilesystemLoader $loader, ConfigFactoryInterface $configFactory) {
     $this->filesystem = $filesystem;
     $this->loader = $loader;
-    $this->config = \Drupal::config('svg_icons.settings');
+    $this->config = $configFactory->get('svg_icons.settings');
   }
 
   /**
