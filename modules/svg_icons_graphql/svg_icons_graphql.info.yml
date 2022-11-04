@@ -1,0 +1,8 @@
+name: SVG Icons GraphQL
+type: module
+description: 'Provides graphql svg direct output.'
+core_version_requirement: ^9 || ^10
+dependencies:
+  - graphql:graphql
+  - svg_icons:svg_icons
+  - svg_image_field:svg_image_field

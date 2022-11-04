@@ -1,9 +1,9 @@
 name: 'SVG Icons'
 type: module
 description: Import SVG Icons and add a Twig filter to display svg icons from a repository
-version: 0.1
+version: 0.2
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 configure: svg_icons.settings
 dependencies:
   - drupal:system (>=8.0)
