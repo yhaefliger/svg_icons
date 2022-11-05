@@ -9,7 +9,7 @@ use Drupal\svg_icons\SVGIcon;
 use GraphQL\Type\Definition\ResolveInfo;
 
 /**
- * Retrieve the image url.
+ * Global file svg render based on mimetype.
  *
  * @GraphQLField(
  *   id = "svg_render",

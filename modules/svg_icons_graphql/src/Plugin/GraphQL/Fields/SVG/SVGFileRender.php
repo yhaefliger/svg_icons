@@ -10,7 +10,7 @@ use Drupal\svg_image_field\Plugin\Field\FieldType\SvgImageFieldItem;
 use GraphQL\Type\Definition\ResolveInfo;
 
 /**
- * Retrieve the image url.
+ * Render for specific svg_image_field type.
  *
  * @GraphQLField(
  *   id = "svg_file_render",
