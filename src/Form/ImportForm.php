@@ -13,7 +13,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
-use Drupal\media\Entity\MediaType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -186,8 +185,9 @@ class ImportForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $values = $form_state->getValues();
-
-    $mediaType = MediaType::load($values['media_bundle']);
+    $mediaTypeStorage = $this->entityTypeManager->getStorage('media_type');
+    /** @var \Drupal\media\MediaTypeInterface $mediaType */
+    $mediaType = $mediaTypeStorage->load($values['media_bundle']);
     $mediaBundle = $mediaType->getOriginalId();
     $mediaField = $mediaType->getSource()->getConfiguration()['source_field'];
 
@@ -227,7 +227,7 @@ class ImportForm extends FormBase {
         }
 
         // Create Drupal Media element.
-        $media = $this->entityTypeManager->getStorage('media')->getQuery()
+        $media = $this->entityTypeManager->getStorage('media')->getQuery()->accessCheck()
           ->condition('bundle', $mediaBundle)
           ->condition($mediaField . '.target_id', $file->id())
           ->execute();
